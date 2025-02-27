@@ -1,0 +1,14 @@
+[
+	{
+		"id": "9c044c6e-2946-4304-ab58-c645d2ccb034",
+		"name": "Admin",
+		"email": "admin@email.com",
+		"hashed_password": "Pass-1234"
+	},
+	{
+		"id": "9c04a129-36ef-48fe-b4aa-7ebf7602f8a6",
+		"name": "Profe",
+		"email": "profe@ioc.com",
+		"hashed_password": "Pass-1234"
+	}
+]

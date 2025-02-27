@@ -1,0 +1,31 @@
+# API
+fastapi[standard]==0.115.8
+pydantic==2.10.6
+python-dotenv==1.0.1
+sqlalchemy==2.0.38
+passlib[bcrypt]==1.7.4
+requests==2.32.3
+PyMySQL==1.1.1
+PyJWT==2.10.1
+python-multipart==0.0.20
+aiofiles==24.1.0
+XlsxWriter==3.2.2
+#pillow==11.1.0
+pdfkit==1.0.0
+jinja2==3.1.5
+itsdangerous==2.2.0
+slowapi==0.1.9
+pylint==3.3.4
+
+# Machine Learning
+pandas==2.2.3
+numpy
+tensorflow==2.18.0
+matplotlib==3.10.0
+seaborn==0.13.2
+scikit-learn==1.6.1
+scikeras==0.13.0
+fuzzywuzzy==0.18.0
+chardet==5.2.0
+python-Levenshtein==0.26.1
+websockets==15.0

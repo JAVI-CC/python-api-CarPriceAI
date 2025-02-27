@@ -1,0 +1,10 @@
+[
+  {
+    "id": "9c044c6e-30f0-4492-83d5-d998c5319ed7",
+    "description": "Import records for training"
+  },
+  {
+    "id": "9c044c6e-329e-4b4e-b4e9-17bee0bb6057",
+    "description": "Import images for training"
+  }
+]
