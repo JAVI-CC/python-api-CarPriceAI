@@ -29,3 +29,13 @@ fuzzywuzzy==0.18.0
 chardet==5.2.0
 python-Levenshtein==0.26.1
 websockets==15.0
+langchain==0.3.19
+langchain-community==0.3.18
+langchain-chroma==0.2.2
+langchain-ollama==0.2.3
+langchain-core==0.3.40
+sentence-transformers==3.4.1
+pysqlite3-binary==0.5.4
+urllib3==2.3.0
+progress==1.6
+fastembed==0.6.0

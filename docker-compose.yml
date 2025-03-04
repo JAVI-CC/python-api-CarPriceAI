@@ -14,8 +14,33 @@ services:
       - 8000:8000
     volumes:
       - ./:/code
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
     depends_on:
       - db
+      - ollama
+
+  ollama:
+    build:
+      context: ./docker-config/ollama
+      dockerfile: Dockerfile_Ollama
+    image: javi98/ollama-llama3:1.0.0
+    container_name: python-api-car-price-ai-ollama
+    restart: unless-stopped
+    ports:
+      - 11434:11434
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
 
   db:
     image: mariadb:11.6.2
@@ -26,7 +51,7 @@ services:
       - "3306:3306"
     volumes:
       - db-data:/var/lib/mysql
-  
+
   phpmyadmin:
     image: phpmyadmin:5.2.2
     container_name: python-api-car-price-ai-phpmyadmin

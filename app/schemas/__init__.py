@@ -14,3 +14,4 @@ from .car_fuel import (CarFuel, CarFuelCreate)
 from .car_color import (CarColor, CarColorCreate)
 from .car_transmission import (CarTransmission,
                                CarTransmissionCreate)
+from .car import CarQuestion, CarAnswer

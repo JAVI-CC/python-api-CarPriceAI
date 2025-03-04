@@ -161,7 +161,8 @@ cython_debug/
 #.idea/
 .github
 .devcontainer
-app/storage/train_cars/*.pkl
+app/storage/train_cars/*
+app/storage/chroma_db/*
 
 # Env files
 .env
