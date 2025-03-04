@@ -4,14 +4,17 @@ from fastapi import BackgroundTasks, APIRouter, status, UploadFile, Request, Fil
 from sqlalchemy.orm import Session
 import pandas as pd
 from ..services import training_cars
-from ..schemas import User as SchemaUser
+from ..schemas import (User as SchemaUser,
+                       CarQuestion as SchemaCarQuestion,
+                       CarAnswer as SchemaCarAnswer)
 from ..db import get_db
 from ..core import (get_current_active_user,
                     csv_find_encoding_and_delimiter,
                     limiter,
                     LIMIT_VALUE,
-                    connection_manager)
-from ..validations import validate_car_csv_file
+                    connection_manager,
+                    get_chat_answer)
+from ..validations import validate_car_csv_file, validate_is_trained_data
 
 router = APIRouter(
     prefix="/cars",
@@ -64,3 +67,21 @@ async def train_dataset_cars(
 
   return {"message":
           f"{'The training process is underway. It may take several minutes, please wait.'}"}
+
+
+@router.post(
+    "/chat/question",
+    response_model=SchemaCarAnswer,
+    dependencies=[
+      Depends(validate_is_trained_data),
+    ],
+)
+@limiter.limit(LIMIT_VALUE)
+async def car_prediction_price(
+    request: Request,
+    ask: SchemaCarQuestion,
+):
+
+  answer = get_chat_answer(ask.question, ask.chat_history)
+
+  return answer

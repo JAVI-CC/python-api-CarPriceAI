@@ -8,6 +8,7 @@ from .core import limiter
 
 app = FastAPI()
 
+
 app.state.limiter = limiter
 app.add_exception_handler(429, _rate_limit_exceeded_handler)
 

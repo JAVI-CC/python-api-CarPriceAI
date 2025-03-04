@@ -13,7 +13,9 @@ from .train_cars import (structure_columns,
                          training_model,
                          validation_model,
                          delete_rows_alredy_exists_db)
-from ..core import generate_date_now, ConnectionManager
+from ..core import (generate_date_now,
+                    create_vectorstore,
+                    ConnectionManager)
 from ..models import (Car,
                       CarBrand,
                       CarModel,
@@ -75,6 +77,11 @@ async def training_cars(db: Session,
     generate_logs(db, user_id, metrics_dict, date_now)
 
     db.commit()
+
+    await connection_manager.send_personal_message({'message': 'INSERT_IN_VECTOR_STORE',
+                                                    'percentage': randint(90, 99)}, user_id)
+
+    await asyncio.to_thread(create_vectorstore, date_now)
 
   await connection_manager.send_personal_message({'message': 'FINALIZED',
                                                   'percentage': 100}, user_id)
