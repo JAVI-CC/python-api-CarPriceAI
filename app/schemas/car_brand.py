@@ -12,7 +12,7 @@ class CarBrandCreate(CarBrandBase):
 
 class CarBrand(CarBrandBase):
   id: str
-  models: list[CarModel]
+  car_models: list[CarModel]
 
   class Config:
     from_attributes = True

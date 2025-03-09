@@ -2,7 +2,6 @@
 
 ```
 $ python -m app.db.migration
-$ python -m spacy download es_core_news_md
 
 $ chromaDB/__init__.py
 __import__('pysqlite3')

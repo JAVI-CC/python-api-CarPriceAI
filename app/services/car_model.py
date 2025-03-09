@@ -16,8 +16,10 @@ def get_model_by_name(db: Session, brand_id: str, model_name: str):
                            ModelCarModel.name == model_name).first()
 
 
-def get_models(db: Session):
-  return db.query(ModelCarModel).order_by(ModelCarModel.name).all()
+def get_models(db: Session, brand_id: str):
+  return db.query(ModelCarModel
+                  ).filter(ModelCarModel.car_brand_id == brand_id
+                           ).order_by(ModelCarModel.name).all()
 
 
 def create_model_prediction(db: Session, model: SchemaModelCreatePrediction) -> None:
