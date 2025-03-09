@@ -15,7 +15,7 @@ def get_cars_recommended(car_scaling_data):
   pca = PCA(n_components=3)
 
   cars_scaled_data_pca = pca.fit_transform(cars_scaled_data)
-  
+
   car_scaling_data_pca = pca.transform(car_scaling_data)
 
   similarity_scores = cosine_similarity(car_scaling_data_pca, cars_scaled_data_pca)

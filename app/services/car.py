@@ -31,6 +31,7 @@ from ..services.log import create_log
 from ..services.log_metric import create_log_metrics
 from ..enums.columns_car import ColumnsCar as EnumColumnsCar
 
+
 async def training_cars(db: Session,
                         user_id: str,
                         cars_df: DataFrame,
@@ -82,7 +83,7 @@ async def training_cars(db: Session,
 
     if not cars_df.empty:
       await connection_manager.send_personal_message({'message': 'INSERT_IN_VECTOR_STORE',
-                                                    'percentage': randint(90, 99)}, user_id)
+                                                      'percentage': randint(90, 99)}, user_id)
 
       await asyncio.to_thread(create_vectorstore, date_now)
 
@@ -233,6 +234,7 @@ def get_all_cars_df(db: Session, conditions=""):
   cars_sql_df = pd.read_sql((f"SELECT {columns_compare_str} FROM cars {conditions}"), db)
 
   return cars_sql_df
+
 
 def get_all_and_id_cars_df(db: Session, conditions=""):
   columns_compare_str = ', '.join(EnumColumnsCar.ALL_AND_ID.value)
