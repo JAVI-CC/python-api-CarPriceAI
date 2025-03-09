@@ -10,9 +10,9 @@ from .train_cars import (structure_columns,
                          delete_duplicates_based_db,
                          scaling_numeric_data,
                          scaling_categorical_data,
+                         save_scaled_data,
                          division_data_training_and_test,
                          training_model,
-                         training_model_recommended,
                          validation_model,
                          delete_rows_alredy_exists_db)
 from ..core import (generate_date_now,
@@ -50,13 +50,8 @@ async def training_cars(db: Session,
 
     ### Phase 4: Model training and predictions ###
     await connection_manager.send_personal_message({'message': 'MODEL_TRAINING_AND_PREDICTIONS',
-                                                    'percentage': randint(31, 40)}, user_id)
+                                                    'percentage': randint(31, 50)}, user_id)
     predictions = await asyncio.to_thread(training_model, x_train, x_test, y_train)
-
-    # Training model cars recommended
-    await connection_manager.send_personal_message({'message': 'MODEL_TRAINING_CARS_RECOMMENDED',
-                                                    'percentage': randint(41, 50)}, user_id)
-    await asyncio.to_thread(training_model_recommended, cars_scaling_df)
 
     ### Phase 5: Model validation ###
     await connection_manager.send_personal_message({'message': 'MODEL_VALIDATION',
@@ -123,6 +118,7 @@ def data_exploration_preparation(cars_df: DataFrame) -> DataFrame:
   if not cars_df.empty:
     cars_scaling_df = scaling_numeric_data(cars_scaling_df)
     cars_scaling_df = scaling_categorical_data(cars_scaling_df)
+    save_scaled_data(cars_scaling_df)
 
   return cars_df, cars_scaling_df
 

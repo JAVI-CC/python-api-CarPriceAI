@@ -35,3 +35,12 @@ def scaling_categorical_data(cars_df: DataFrame) -> DataFrame:
     pickle.dump(encoders, f)
 
   return cars_df
+
+
+def save_scaled_data(cars_scaling_df: DataFrame) -> None:
+  file_path = f'{EnumStoragePath.TRAIN_CARS.value}/scaled_data.pkl'
+
+  with open(file_path, 'wb') as f:
+    pickle.dump(cars_scaling_df, f)
+
+  return None
