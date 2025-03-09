@@ -1,6 +1,6 @@
 from .user import get_user_by_email
 from .auth import login, login_access_token
-from .car import training_cars, get_count_cars_trained
+from .car import training_cars, get_count_cars_trained, get_all_cars_df, get_all_and_id_cars_df
 from .log import create_log
 from .log_metric import create_log_metrics
 from .car_prediction import create_car_prediction

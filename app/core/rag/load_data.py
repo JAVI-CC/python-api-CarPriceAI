@@ -3,20 +3,19 @@ from langchain_community.document_loaders import DataFrameLoader
 from langchain.schema import Document
 from langchain_chroma.vectorstores import Chroma
 from progress.bar import Bar
-from ...enums.columns_car import ColumnsCar as EnumColumnsCar
 from ...enums.storage_path import StoragePath as EnumStoragePath
 from .embed_model import get_embed_model
 
 
 def convert_df_to_documents(date=None):
+  from ...services import get_all_and_id_cars_df
   from ...db.session import engine
 
   where_date = ""
   if date:
     where_date = f"WHERE date = '{str(date)}'"
 
-  columns_compare_str = ', '.join(EnumColumnsCar.ALL_AND_ID.value)
-  cars_df = pd.read_sql((f"SELECT {columns_compare_str} FROM cars {where_date}"), engine)
+  cars_df = get_all_and_id_cars_df(engine, where_date)
 
   loader = DataFrameLoader(cars_df, page_content_column="id")
 

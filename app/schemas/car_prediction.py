@@ -5,8 +5,9 @@ from pydantic import (BaseModel, Field,
                       field_validator,
                       computed_field)
 from ..core.date_formatter import date_format_server_to_client
+from ..schemas.car import Car as SchemaCar
 
-
+# Order columns important!
 class CarPredictionBase(BaseModel):
   brand: str = Field(min_length=1, max_length=150)
   model: str = Field(min_length=1, max_length=150)
@@ -73,6 +74,7 @@ class CarPredictionCreate(BaseModel):
 class CarPrediction(BaseModel):
   price: float
   date: datetime
+  cars_recommended: list[SchemaCar]
 
   @computed_field
   @property

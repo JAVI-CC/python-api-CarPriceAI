@@ -3,6 +3,7 @@ from datetime import datetime
 from random import randint
 from uuid import uuid4
 from sqlalchemy.orm import Session
+import pandas as pd
 from pandas import DataFrame
 from .train_cars import (structure_columns,
                          null_data_handling,
@@ -11,6 +12,7 @@ from .train_cars import (structure_columns,
                          scaling_categorical_data,
                          division_data_training_and_test,
                          training_model,
+                         training_model_recommended,
                          validation_model,
                          delete_rows_alredy_exists_db)
 from ..core import (generate_date_now,
@@ -27,7 +29,7 @@ from ..schemas import (Log as SchemaLog,
                        LogMetric as SchemaLogMetric)
 from ..services.log import create_log
 from ..services.log_metric import create_log_metrics
-
+from ..enums.columns_car import ColumnsCar as EnumColumnsCar
 
 async def training_cars(db: Session,
                         user_id: str,
@@ -48,8 +50,13 @@ async def training_cars(db: Session,
 
     ### Phase 4: Model training and predictions ###
     await connection_manager.send_personal_message({'message': 'MODEL_TRAINING_AND_PREDICTIONS',
-                                                    'percentage': randint(31, 50)}, user_id)
+                                                    'percentage': randint(31, 40)}, user_id)
     predictions = await asyncio.to_thread(training_model, x_train, x_test, y_train)
+
+    # Training model cars recommended
+    await connection_manager.send_personal_message({'message': 'MODEL_TRAINING_CARS_RECOMMENDED',
+                                                    'percentage': randint(41, 50)}, user_id)
+    await asyncio.to_thread(training_model_recommended, cars_scaling_df)
 
     ### Phase 5: Model validation ###
     await connection_manager.send_personal_message({'message': 'MODEL_VALIDATION',
@@ -78,10 +85,11 @@ async def training_cars(db: Session,
 
     db.commit()
 
-    await connection_manager.send_personal_message({'message': 'INSERT_IN_VECTOR_STORE',
+    if not cars_df.empty:
+      await connection_manager.send_personal_message({'message': 'INSERT_IN_VECTOR_STORE',
                                                     'percentage': randint(90, 99)}, user_id)
 
-    await asyncio.to_thread(create_vectorstore, date_now)
+      await asyncio.to_thread(create_vectorstore, date_now)
 
   await connection_manager.send_personal_message({'message': 'FINALIZED',
                                                   'percentage': 100}, user_id)
@@ -221,3 +229,18 @@ def generate_logs(db: Session,
 
 def get_count_cars_trained(db: Session) -> int:
   return db.query(Car).count()
+
+
+def get_all_cars_df(db: Session, conditions=""):
+  columns_compare_str = ', '.join(EnumColumnsCar.ALL.value)
+
+  cars_sql_df = pd.read_sql((f"SELECT {columns_compare_str} FROM cars {conditions}"), db)
+
+  return cars_sql_df
+
+def get_all_and_id_cars_df(db: Session, conditions=""):
+  columns_compare_str = ', '.join(EnumColumnsCar.ALL_AND_ID.value)
+
+  cars_sql_df = pd.read_sql((f"SELECT {columns_compare_str} FROM cars {conditions}"), db)
+
+  return cars_sql_df

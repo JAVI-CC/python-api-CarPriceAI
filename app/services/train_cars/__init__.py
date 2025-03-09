@@ -6,3 +6,4 @@ from .normalize_dataset import scaling_categorical_data, scaling_numeric_data
 from .train_validation_model import (division_data_training_and_test,
                                      training_model,
                                      validation_model)
+from .train_model_recommended import training_model_recommended, get_cars_recommended

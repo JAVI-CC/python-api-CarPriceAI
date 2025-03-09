@@ -12,7 +12,6 @@ from ..schemas import (
     CarTransmissionCreate as SchemaCarTransmissionCreate,
     CarFuelCreate as SchemaCarFuelCreate,
     CarColorCreate as SchemaCarColorCreate,
-    CarPrediction as SchemaCarPrediction,
 )
 from ..enums.storage_path import StoragePath as EnumStoragePath
 from ..enums.columns_car import ColumnsCar as EnumColumnsCar
@@ -28,19 +27,22 @@ def get_car_predictions(db: Session):
   return db.query(ModelCarPrediction).order_by(desc(ModelCarPrediction.date)).all()
 
 
-def create_car_prediction(
-        db: Session, car_prediction: SchemaCarPredictionValidation) -> SchemaCarPrediction:
+def create_car_prediction(db: Session, car_prediction: SchemaCarPredictionValidation):
 
   with open(f'{EnumStoragePath.TRAIN_CARS.value}/scalers.pkl', 'rb') as file:
     scalers = pickle.load(file)
 
   car_prediction_transform = transform_data(db, scalers, car_prediction)
+  car_prediction_transform = np.array([list(car_prediction_transform.model_dump().values())])
 
   # Scaler data
   with open(f'{EnumStoragePath.TRAIN_CARS.value}/model.pkl', 'rb') as file:
     model = pickle.load(file)
 
-  price_prediction = model.predict(np.array([list(car_prediction_transform.model_dump().values())]))
+  price_prediction = model.predict(car_prediction_transform)
+  car_prediction_transform = np.append(car_prediction_transform,
+                                       np.array(price_prediction[0])
+                                       ).reshape(1, -1)
 
   price = round(scalers['price'].inverse_transform(price_prediction.reshape(-1, 1))[0][0])
 
@@ -81,7 +83,7 @@ def create_car_prediction(
   db.commit()
   db.refresh(db_car_prediction)
 
-  return db_car_prediction
+  return db_car_prediction, car_prediction_transform
 
 
 def transform_data(

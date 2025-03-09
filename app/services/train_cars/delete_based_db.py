@@ -3,17 +3,14 @@ from pandas import DataFrame
 from ...db import engine
 from ...enums.columns_car import ColumnsCar as EnumColumnsCar
 
-
 def delete_duplicates_based_db(cars_df: DataFrame, is_merge: bool) -> DataFrame:
+  from ...services import get_all_cars_df
 
-  columns_compare = EnumColumnsCar.ALL.value
-  columns_compare_str = ', '.join(EnumColumnsCar.ALL.value)
-
-  cars_sql_df = pd.read_sql((f"SELECT {columns_compare_str} FROM cars"), engine)
+  cars_sql_df = get_all_cars_df(engine)
 
   if not is_merge:
     cars_df = cars_df.loc[
-      cars_df[columns_compare]
+      cars_df[EnumColumnsCar.ALL.value]
       .isin(cars_sql_df.to_dict(orient='list'))
       .all(axis=1) is False
     ]
@@ -28,10 +25,9 @@ def delete_duplicates_based_db(cars_df: DataFrame, is_merge: bool) -> DataFrame:
 
 
 def delete_rows_alredy_exists_db(cars_df: DataFrame) -> DataFrame:
+  from ...services import get_all_cars_df
 
-  columns_compare_str = ', '.join(EnumColumnsCar.ALL.value)
-
-  cars_sql_df = pd.read_sql((f"SELECT {columns_compare_str} FROM cars"), engine)
+  cars_sql_df = get_all_cars_df(engine)
 
   new_cars_df = cars_df.loc[cars_df.index.isin(cars_sql_df.index) == False]
 

@@ -1,3 +1,4 @@
+# Order columns important!
 COLUMN_VARIANTS = {
     'brand': ['marca', 'brand', 'marca de coche', 'marca vehículo', 'make', 'make car', 'make vehicle', 'fabricante', 'marque', 'marca automobile', 'make automobile'],
     'model': ['modelo', 'model', 'modèle', 'modèle vehicle', 'model car', 'model vehicle', 'modelo vehículo', 'modelo coche', 'modèle automobile'],
