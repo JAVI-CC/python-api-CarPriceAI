@@ -23,3 +23,4 @@ from .websocket_connection import ConnectionManager, connection_manager
 from .rag.load_data import create_vectorstore
 from .rag.init_rag import get_chat_answer
 from .rag.embed_model import get_embed_model
+from .delete_files_by_path import delete_files_by_path
