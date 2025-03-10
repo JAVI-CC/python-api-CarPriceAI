@@ -168,6 +168,7 @@ README.md
 .git
 .github
 .devcontainer
+.vscode
 docker-config/ollama/
 screenshots/
 LICENSE.txt
