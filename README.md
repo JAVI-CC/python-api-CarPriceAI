@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="screenshots/logo.png" alt="CarpriceAI">
+  <img src="screenshots/logo_background_white.png" alt="CarpriceAI">
 </p>
 
 <p align="left">
