@@ -168,5 +168,6 @@ README.md
 .git
 .github
 .devcontainer
+docker-config/ollama/
 screenshots/
 LICENSE.txt
