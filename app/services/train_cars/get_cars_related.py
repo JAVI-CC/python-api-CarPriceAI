@@ -6,8 +6,8 @@ from ...db import engine
 from ...enums.storage_path import StoragePath as EnumStoragePath
 
 
-def get_cars_recommended(car_scaling_data):
-  from ...services import get_all_cars_df
+def get_cars_related(car_scaling_data):
+  from .. import get_all_cars_df
 
   with open(f'{EnumStoragePath.TRAIN_CARS.value}/scaled_data.pkl', 'rb') as file:
     cars_scaled_data = pickle.load(file)
@@ -24,6 +24,6 @@ def get_cars_recommended(car_scaling_data):
 
   cars_df = get_all_cars_df(engine)
 
-  cars_recommended = cars_df.iloc[similar_car_indices]
+  cars_related = cars_df.iloc[similar_car_indices]
 
-  return cars_recommended
+  return cars_related

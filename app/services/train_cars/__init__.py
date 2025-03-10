@@ -8,4 +8,4 @@ from .normalize_dataset import (scaling_categorical_data,
 from .train_validation_model import (division_data_training_and_test,
                                      training_model,
                                      validation_model)
-from .train_model_recommended import get_cars_recommended
+from .get_cars_related import get_cars_related

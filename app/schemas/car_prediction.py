@@ -74,7 +74,7 @@ class CarPredictionCreate(BaseModel):
 class CarPrediction(BaseModel):
   price: float
   date: datetime
-  cars_recommended: list[SchemaCar]
+  cars_related: list[SchemaCar]
 
   @computed_field
   @property
