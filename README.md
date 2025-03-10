@@ -247,8 +247,7 @@ In addition, the application includes a <b>RAG (Retriever-Augmented Generation)<
 
 <h3>Configure values in the .env file</h3>
 
-<pre><code>
-<strong>DB_DRIVER=""</strong>
+<pre><code><strong>DB_DRIVER=""</strong>
 <strong>DB_HOST=""</strong>
 <strong>DB_PORT=""</strong>
 <strong>DB_DATABASE=""</strong>
@@ -256,18 +255,15 @@ In addition, the application includes a <b>RAG (Retriever-Augmented Generation)<
 <strong>DB_PASSWORD=""</strong>
 </code></pre>
 
-<pre><code>
-<span># command generate JWT_SECRET_KEY: openssl rand -hex 32</span>
+<pre><code><span># command generate JWT_SECRET_KEY: openssl rand -hex 32</span>
 <strong>JWT_SECRET_KEY=""</strong>
 <strong>JWT_ALGORITHM="HS256"</strong>
 </code></pre>
 
-<pre><code>
-<strong>TIMEZONE=""</strong>
+<pre><code><strong>TIMEZONE=""</strong>
 </code></pre>
 
-<pre><code>
-<strong>BASE_URL_OLLAMA="http://localhost:11434"</strong>
+<pre><code><strong>BASE_URL_OLLAMA="http://localhost:11434"</strong>
 </code></pre>
 
 <hr>
@@ -309,4 +305,4 @@ In addition, the application includes a <b>RAG (Retriever-Augmented Generation)<
 
 <h4>License <a name="license"></a></h4>
 <strong>JAVI-CC</strong> - CarPriceAI (2025)
-License MIT. [LICENSE.txt](LICENSE.txt) for more details
+License MIT. <a href="LICENSE.txt">LICENSE.txt</a> for more details
