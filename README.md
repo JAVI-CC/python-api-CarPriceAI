@@ -303,6 +303,6 @@ In addition, the application includes a <b>RAG (Retriever-Augmented Generation)<
 
 <hr>
 
-<h4>License <a name="license"></a></h4>
+<h3>License <a name="license"></a></h3>
 <strong>JAVI-CC</strong> - CarPriceAI (2025)
 License MIT. <a href="LICENSE.txt">LICENSE.txt</a> for more details
