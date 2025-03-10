@@ -32,6 +32,8 @@ def init_chat():
   If the question is in Spanish, respond in Spanish.
   If the question is in Catalan, respond in Catalan.
 
+  When mentioning car prices, convert the price from USD to EUR. Use the current exchange rate (1 USD = 0.85 EUR). Display the price in euros (€)
+
   Here is the conversation history: {context}
   
   Question: {question}
