@@ -292,10 +292,10 @@ In addition, the application includes a <b>RAG (Retriever-Augmented Generation)<
 <pre><code>cd python-api-CarPriceAI</pre></code>
 <pre><code>cp .env.example .env</pre></code>
 <pre><code>docker compose up -d</pre></code>
-<pre><code>docker compose exec ollama chmod +x ./docker-config/first_start_ollama.sh</pre></code>
-<pre><code>docker compose exec ollama ./first_start_ollma.sh</pre></code>
-<pre><code>docker compose exec app chmod +x ./docker-config/run.sh</pre></code>
-<pre><code>docker compose exec app ./docker-config/run.sh</code>
+<pre><code>docker compose exec ollama chmod +x ./first_start_ollama.sh</pre></code>
+<pre><code>docker compose exec ollama ./first_start_ollama.sh</pre></code>
+<pre><code>docker compose exec app chmod +x ./code/run.sh</pre></code>
+<pre><code>docker compose exec app ./code/run.sh</code>
 </pre>
 
 

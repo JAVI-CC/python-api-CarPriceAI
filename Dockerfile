@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /code
 
-COPY ./requirements.txt /code/requirements.txt
+COPY ./requirements.txt ./requirements.txt
 
 # Install python3 and dependencies
 RUN apt-get update && \
@@ -34,7 +34,9 @@ RUN pip install --upgrade six
 # Remove cache pip
 RUN pip cache purge
 
-COPY ./app /code/
+COPY ./app ./
+
+COPY ./docker-config/run.sh ./run.sh
 
 EXPOSE 8000
 
